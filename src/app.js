@@ -16,8 +16,18 @@ bot.on("ready", () => {
 bot.on('messageCreate', (msg) => {
   if (_.contains(LISTEN_CHANNELS,msg.channel.id)) {
     console.log(msg.channel.name + " - FORWARDED");
-    let content = {content: msg.content, disableEveryone: false, tts: false};
-    bot.createMessage(FORWARD_CHANNELS[msg.channel.id], content);
+    if (msg.content) {
+      let content = {content: msg.content, disableEveryone: false, tts: false};
+      bot.createMessage(FORWARD_CHANNELS[msg.channel.id], content);
+    }
+    if (msg.attachments.length > 0) {
+      console.log('forward attachments');
+      console.log(msg.attachments);
+      _.each(msg.attachments, (attachment) => {
+        console.log(attachment);
+        bot.createMessage(FORWARD_CHANNELS[msg.channel.id], attachment.url);
+      });
+    }
   }
 });
 
