@@ -21,6 +21,9 @@ botNewServer.on("ready", () => {
 bot.on('messageCreate', (msg) => {
   if (_.contains(LISTEN_CHANNELS,msg.channel.id)) {
     console.log(msg.channel.name + " - FORWARDED");
+    if (_.includes(msg.content, "discord") || _.includes(msg.content, "t.me")){
+      return;
+    }
     if (msg.content) {
       let content = {content: msg.content, disableEveryone: false, tts: false};
       botNewServer.createMessage(FORWARD_CHANNELS[msg.channel.id], content);
