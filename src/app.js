@@ -30,9 +30,7 @@ bot.on('messageCreate', (msg) => {
     }
     if (msg.attachments.length > 0) {
       console.log('forward attachments');
-      console.log(msg.attachments);
       _.each(msg.attachments, (attachment) => {
-        console.log(attachment);
         botNewServer.createMessage(FORWARD_CHANNELS[msg.channel.id], attachment.url);
       });
     }
