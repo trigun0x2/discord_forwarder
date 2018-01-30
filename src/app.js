@@ -21,7 +21,7 @@ botNewServer.on("ready", () => {
 bot.on('messageCreate', (msg) => {
   if (_.contains(LISTEN_CHANNELS,msg.channel.id)) {
     console.log(msg.channel.name + " - FORWARDED");
-    if (_.includes(msg.content, "discord") || _.includes(msg.content, "t.me")){
+    if (msg.content.includes("discord") || msg.content.includes("t.me")){
       return;
     }
     if (msg.content) {
